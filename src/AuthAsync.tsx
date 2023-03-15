@@ -31,12 +31,7 @@ function useProvideAuth() {
                 clearInterval(interval);
             }, secondsToWait*1000);
         });
-        p.then(
-            (userData: any) => { 
-                setUser(userData); 
-            },
-            (error) => { console.error(error); }
-        );
+        
         return p;
       };
       const signOut = async () => {

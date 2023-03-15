@@ -12,7 +12,8 @@ const authContext = createContext({} as AuthContext);
 export const useAuth = () => {
     return useContext(authContext);
 };
-const DEFAULT_USER: User = { username: "theo", uid: "123456" };
+const USER_DATA: User = { username: "theo", uid: "123456" };
+
 function useProvideAuth() {
     const [user, setUser] = useState<User>();
     const signIn = async () => {
@@ -24,12 +25,19 @@ function useProvideAuth() {
             }, 1000);
             
             setTimeout(() => {
-                console.log('set DEFAULT_USER in context');
-                setUser(DEFAULT_USER);
+                console.log('set USER_DATA in context');
+                setUser(USER_DATA);
+                resolve(USER_DATA);
                 clearInterval(interval);
             }, secondsToWait*1000);
         });
-        await p;
+        p.then(
+            (userData: any) => { 
+                setUser(userData); 
+            },
+            (error) => { console.error(error); }
+        );
+        return p;
       };
       const signOut = async () => {
         console.log('set undefined user in context');

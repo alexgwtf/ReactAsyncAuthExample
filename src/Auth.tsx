@@ -12,11 +12,11 @@ const authContext = createContext({} as AuthContext);
 export const useAuth = () => {
   return useContext(authContext);
 };
-const DEFAULT_USER: User = { username: "theo", uid: "123456" };
+const USER_DATA: User = { username: "theo", uid: "123456" };
 function useProvideAuth() {
   const [user, setUser] = useState<User>();
   const signIn = () => {
-    setUser(DEFAULT_USER)
+    setUser(USER_DATA)
   };
   const signOut = () => {
     setUser(undefined);
